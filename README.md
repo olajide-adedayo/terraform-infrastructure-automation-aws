@@ -17,11 +17,11 @@ Core Technologies: Terraform · AWS · Amazon EC2 · AWS CLI · Infrastructure a
 
 ## 1. Project Overview
 
-Purpose
+### Purpose
 
 This project implements an Infrastructure as Code (IaC) workflow for provisioning and managing AWS compute infrastructure using Terraform. The objective is to replace manual infrastructure configuration with a repeatable, declarative, and version-controlled approach to AWS resource management.
 
-Project Summary
+### Project Summary
 
 The implementation provisions an Amazon EC2 instance using Terraform and integrates supporting AWS infrastructure components required for secure and controlled access.
 
@@ -29,7 +29,7 @@ The Terraform configuration defines the infrastructure, dynamically discovers a 
 
 The deployed infrastructure was validated through Terraform commands, AWS CLI queries, and the AWS Management Console to confirm that the declared configuration corresponded with the actual AWS environment.
 
-Engineering Scope
+### Engineering Scope
 
 The project covers:
 
@@ -49,7 +49,7 @@ The project covers:
 - Cost-conscious EC2 lifecycle management
 - Secure handling of private keys and Terraform state files
 
-Implementation Outcome
+### Implementation Outcome
 
 The completed implementation successfully provisioned and managed the defined AWS infrastructure through Terraform, with the resulting resources verified against Terraform state and the AWS environment.
 
