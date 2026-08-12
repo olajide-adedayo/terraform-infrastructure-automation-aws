@@ -7,7 +7,7 @@
 
 ---
 
-«Infrastructure as Code implementation for provisioning and managing AWS compute infrastructure with Terraform.
+## Infrastructure as Code implementation for provisioning and managing AWS compute infrastructure with Terraform.
 
 This project demonstrates a production-oriented Terraform workflow for defining, provisioning, validating, and managing AWS infrastructure through declarative configuration. The implementation includes Amazon EC2 provisioning, dynamic AMI discovery, SSH security-group configuration, Terraform state management, infrastructure planning, deployment, lifecycle operations, and post-deployment verification.
 
@@ -57,13 +57,13 @@ The EC2 instance was subsequently stopped after verification as part of the proj
 
 ---
 
-2. Engineering Objective
+## 2. Engineering Objective
 
-Problem
+### Problem
 
 Managing cloud infrastructure manually can introduce configuration inconsistencies, reduce repeatability, and make infrastructure changes difficult to track and reproduce. A declarative Infrastructure as Code approach provides a controlled way to define infrastructure requirements, review proposed changes, and maintain alignment between configuration and deployed resources.
 
-Objective
+### Objective
 
 The objective of this project was to implement a Terraform-driven AWS infrastructure workflow that provides a repeatable and auditable approach to provisioning and managing compute infrastructure.
 
@@ -79,7 +79,7 @@ The implementation was designed to demonstrate practical engineering capabilitie
 - Post-deployment verification
 - EC2 lifecycle and cost management
 
-Expected Outcome
+### Expected Outcome
 
 The expected outcome was a functioning AWS infrastructure environment provisioned from Terraform configuration and verifiable through both Terraform and AWS tooling.
 
