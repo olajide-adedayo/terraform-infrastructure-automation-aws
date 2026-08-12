@@ -15,7 +15,7 @@ Core Technologies: Terraform · AWS · Amazon EC2 · AWS CLI · Infrastructure a
 
 ---
 
-1. Project Overview
+## 1. Project Overview
 
 Purpose
 
