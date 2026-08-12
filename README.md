@@ -54,3 +54,35 @@ The project covers:
 The completed implementation successfully provisioned and managed the defined AWS infrastructure through Terraform, with the resulting resources verified against Terraform state and the AWS environment.
 
 The EC2 instance was subsequently stopped after verification as part of the project's cost-control and resource-lifecycle management practices.
+
+---
+
+2. Engineering Objective
+
+Problem
+
+Managing cloud infrastructure manually can introduce configuration inconsistencies, reduce repeatability, and make infrastructure changes difficult to track and reproduce. A declarative Infrastructure as Code approach provides a controlled way to define infrastructure requirements, review proposed changes, and maintain alignment between configuration and deployed resources.
+
+Objective
+
+The objective of this project was to implement a Terraform-driven AWS infrastructure workflow that provides a repeatable and auditable approach to provisioning and managing compute infrastructure.
+
+The implementation was designed to demonstrate practical engineering capabilities across:
+
+- Declarative infrastructure definition
+- AWS resource provisioning through Terraform
+- Dynamic AMI discovery
+- Secure network-access configuration
+- Terraform state management
+- Infrastructure validation and change planning
+- Controlled infrastructure deployment
+- Post-deployment verification
+- EC2 lifecycle and cost management
+
+Expected Outcome
+
+The expected outcome was a functioning AWS infrastructure environment provisioned from Terraform configuration and verifiable through both Terraform and AWS tooling.
+
+The implementation achieved this outcome by provisioning the defined EC2 infrastructure, maintaining its state through Terraform, validating the resulting AWS resources, and performing lifecycle operations after successful verification.
+
+---
