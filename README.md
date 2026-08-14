@@ -969,5 +969,133 @@ This reinforces an important Infrastructure as Code practice: infrastructure cha
 
 ---
 
+## 15. Verification and Evidence
 
+Verification was performed at multiple stages of the implementation to confirm that the Terraform configuration was valid, the AWS infrastructure was provisioned as expected, and the resulting infrastructure was aligned with the Terraform configuration.
 
+### Terraform Verification
+
+The Terraform workflow was verified through the following commands:
+
+```bash
+terraform fmt
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
+
+The implementation evidence captured successful Terraform initialization, configuration validation, infrastructure planning, state inspection, and final no-change reconciliation.
+
+### AWS CLI Verification
+
+The provisioned EC2 infrastructure was independently verified using the AWS CLI.
+
+The verification confirmed key attributes of the deployed resource, including:
+
+```text
+Instance ID:          i-0a14db2822c4f7927
+Instance Type:        t3.micro
+AMI ID:               ami-06e78a71af43ef21a
+Availability Zone:    us-east-1a
+Private IP:           172.31.14.57
+State:                stopped
+```
+
+This provided an independent verification path outside Terraform's own output.
+
+### AWS Management Console Verification
+
+The AWS Management Console was used to visually verify the EC2 instance and its associated security group.
+
+The captured evidence confirmed:
+
+- EC2 instance presence
+- EC2 instance state
+- Instance configuration
+- Associated security group
+- SSH access rule
+- HTTP access rule
+
+### Verification Summary
+
+| Verification Area | Verified Result |
+|---|---|
+| Terraform initialization | Successful |
+| Terraform configuration validation | Successful |
+| Terraform planning | Successfully evaluated |
+| Terraform deployment | AWS infrastructure provisioned |
+| EC2 instance | Successfully provisioned and verified |
+| AMI selection | Ubuntu AMI successfully used |
+| Security group | Successfully configured and verified |
+| Terraform state | Successfully maintained and inspected |
+| AWS CLI verification | Successful |
+| AWS Console verification | Successful |
+| Final Terraform plan | `No changes. Your infrastructure matches the configuration.` |
+| Final EC2 state | `stopped` |
+
+### Evidence Screenshots
+
+The following screenshots provide visual evidence of the Terraform implementation and AWS infrastructure verification.
+
+#### Terraform Project Structure
+
+![Terraform project structure](screenshots/01-terraform-project-structure.png)
+
+*Terraform project structure and configuration files.*
+
+#### Terraform Initialization
+
+![Terraform initialization](screenshots/02-terraform-init-success.png)
+
+*Successful Terraform provider initialization.*
+
+#### Terraform Validation
+
+![Terraform validation](screenshots/03-terraform-validate-success.png)
+
+*Successful Terraform configuration validation.*
+
+#### Terraform Plan
+
+![Terraform plan](screenshots/04-terraform-plan-no-changes.png)
+
+*Terraform plan confirming that no infrastructure changes were required.*
+
+#### Terraform State
+
+![Terraform state resources](screenshots/05-terraform-state-resources.png)
+
+*Terraform state showing managed infrastructure resources.*
+
+#### Security Group Configuration
+
+![Terraform security group configuration](screenshots/06-terraform-security-group-configuration.png)
+
+*Terraform security group configuration and network access rules.*
+
+#### EC2 Resource Configuration
+
+![Terraform EC2 resource](screenshots/07-terraform-ec2-resource.png)
+
+*Terraform configuration for the Amazon EC2 instance.*
+
+#### AWS CLI EC2 Verification
+
+![AWS CLI EC2 verification](screenshots/08-aws-ec2-verification.png)
+
+*AWS CLI verification of the provisioned EC2 infrastructure.*
+
+#### AWS Console EC2 Instance
+
+![AWS Console EC2 instance](screenshots/09-aws-console-ec2-instance.png)
+
+*AWS Management Console verification of the EC2 instance.*
+
+#### AWS Security Group Rules
+
+![AWS security group rules](screenshots/10-aws-security-group-rules.png)
+
+*AWS Management Console verification of the EC2 security group rules.*
+
+---
