@@ -93,39 +93,25 @@ The solution uses Terraform as the Infrastructure as Code control layer between 
 
 ### Architecture Workflow
 
-                    Engineer
-                       |
-                       v
-              Terraform Configuration
-                       |
-                       v
-                Terraform CLI
-                       |
-                       v
-                AWS Provider
-                       |
-                       v
-                  AWS APIs
-                       |
-          +------------+-------------+
-          |                          |
-          v                          v
-   Terraform Data Sources      AWS Resources
-          |                          |
-          |                    +-----+------+
-          |                    |            |
-          v                    v            v
-     Ubuntu AMI           EC2 Instance  Security Group
-     Discovery               |              |
-                             |              |
-                             +------+-------+
-                                    |
-                                    v
-                              AWS Environment
-                                    |
-                                    v
-                             Terraform State
+```mermaid
+flowchart TD
+    A[Engineer] --> B[Terraform Configuration]
+    B --> C[Terraform CLI]
+    C --> D[AWS Provider]
+    D --> E[AWS APIs]
 
+    E --> F[Terraform Data Sources]
+    E --> G[AWS Resources]
+
+    F --> H[Ubuntu AMI Discovery]
+    G --> I[EC2 Instance]
+    G --> J[Security Group]
+    G --> K[AWS Key Pair]
+
+    I --> L[Terraform State]
+    J --> L
+    K --> L
+```
 ### Architecture Components
 
 Component| Role
@@ -176,5 +162,48 @@ The architecture is intentionally simple and modular at the resource-configurati
 - State-based infrastructure reconciliation
 - Plan-before-apply workflow
 - Independent verification of deployed resources
+
+---
+
+4. Technology Stack
+
+Technology| Role in the Project
+Terraform| Infrastructure as Code for defining, provisioning, and managing AWS infrastructure
+Amazon Web Services (AWS)| Cloud platform hosting the provisioned infrastructure
+Amazon EC2| Compute infrastructure provisioned and managed through Terraform
+AWS Security Groups| Network access control for the EC2 instance
+AWS Key Pair| SSH authentication mechanism associated with the EC2 instance
+Terraform AWS Provider| Integration layer between Terraform and AWS APIs
+Terraform Data Sources| Dynamic discovery of AWS infrastructure information, including the Ubuntu AMI
+Terraform State| Tracks managed infrastructure and enables configuration-to-resource reconciliation
+AWS CLI| Command-line inspection and verification of AWS resources
+PowerShell| Local command-line environment used to execute Terraform and AWS CLI workflows
+Visual Studio Code| Development environment used to create and manage Terraform configuration
+
+Infrastructure Technologies
+
+- Cloud Platform: AWS
+- Compute: Amazon EC2
+- Infrastructure as Code: Terraform
+- Operating System Image: Ubuntu Server
+- Network Security: AWS Security Groups
+- Authentication: AWS Key Pair / SSH
+- Infrastructure Verification: Terraform CLI, AWS CLI, AWS Management Console
+
+Terraform Capabilities Demonstrated
+
+- Provider configuration
+- Resource definitions
+- Data sources
+- Resource attributes and dependencies
+- Outputs
+- Terraform state management
+- Configuration validation
+- Execution planning
+- Infrastructure provisioning
+- Infrastructure reconciliation
+- Resource lifecycle management
+
+«Versioning note: Exact software versions will be documented where they were verified for the implementation environment. The README does not rely on version-specific claims unless they are confirmed.»
 
 ---
