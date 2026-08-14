@@ -1164,3 +1164,55 @@ This project demonstrates practical experience across cloud infrastructure, Infr
 - AWS resource cost awareness
 
 ---
+
+## 17. Key Engineering Lessons
+
+The implementation provided practical experience with designing, provisioning, validating, and reconciling AWS infrastructure through Terraform.
+
+### Declarative Infrastructure
+
+Terraform allows infrastructure to be described declaratively rather than relying on manual, sequential configuration steps. This makes the desired infrastructure state explicit and repeatable.
+
+### Plan Before Apply
+
+`terraform plan` provides an important control point before infrastructure changes are executed.
+
+Reviewing the proposed changes helps reduce unintended modifications and provides visibility into what Terraform intends to create, modify, or remove.
+
+### Terraform State Is Fundamental
+
+Terraform state provides the relationship between the configuration and the infrastructure resources Terraform manages.
+
+Understanding state is therefore essential for reliable infrastructure provisioning, change detection, and reconciliation.
+
+### Data Sources Enable Dynamic Discovery
+
+Terraform data sources can retrieve information about existing AWS resources and services without requiring that information to be manually hard-coded.
+
+The AMI discovery implementation demonstrated how data sources can dynamically identify an appropriate image for EC2 provisioning.
+
+### AMI IDs Are Region-Specific
+
+AMI identifiers are associated with specific AWS regions and image versions.
+
+Infrastructure configurations should therefore account for regional availability when selecting AMIs rather than assuming that a single AMI ID is universally valid across AWS regions.
+
+### Security Must Be Part of Infrastructure Design
+
+Infrastructure configuration should include appropriate access controls from the beginning.
+
+The project demonstrated this through restricted SSH access, protected private-key material, AWS credential handling, and exclusion of sensitive Terraform artifacts from source control.
+
+### Verification Should Be Independent
+
+Terraform output alone should not be the only source of truth when validating cloud infrastructure.
+
+The project used both Terraform and AWS-native tooling, including the AWS CLI and AWS Management Console, to independently verify the resulting infrastructure.
+
+### Cost Awareness Is an Operational Responsibility
+
+Cloud infrastructure should be actively managed throughout its lifecycle.
+
+Stopping the unused EC2 instance after verification reduced unnecessary ongoing compute usage while maintaining awareness that associated resources such as EBS storage may continue to incur charges.
+
+---
