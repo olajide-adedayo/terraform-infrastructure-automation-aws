@@ -573,5 +573,71 @@ This lifecycle action demonstrates operational awareness of resource utilization
 
 ---
 
+## 10. Terraform State Management
+
+Terraform state is a core component of the infrastructure management workflow. It maintains a record of the infrastructure resources Terraform manages and allows Terraform to compare the declared configuration with the current state of managed resources.
+
+### What Terraform State Does
+
+Terraform uses state to maintain the relationship between Terraform configuration and the corresponding infrastructure resources in AWS.
+
+In practical terms, state allows Terraform to determine:
+
+- Which resources are managed by the configuration
+- The identifiers and attributes of managed resources
+- Whether infrastructure changes are required
+- What actions Terraform should propose during `terraform plan`
+- Whether the current infrastructure is aligned with the declared configuration
+
+### State File
+
+During the implementation, Terraform maintained a local state file:
+
+```text
+terraform.tfstate
+```
+
+The state file contained Terraform's recorded information about the managed AWS infrastructure.
+
+Because Terraform state can contain sensitive infrastructure information, the state file was excluded from the public Git repository through `.gitignore`.
+
+A backup state file was also generated locally:
+
+```text
+terraform.tfstate.backup
+```
+
+This file was likewise excluded from version control.
+
+### State Verification
+
+The Terraform-managed state was inspected using Terraform commands and compared against the declared infrastructure configuration.
+
+The implementation used Terraform planning and state inspection to verify that the expected resources were being tracked.
+
+The resulting infrastructure was also independently verified through the AWS CLI and AWS Management Console.
+
+### Observed Behaviour
+
+A final Terraform plan produced:
+
+```text
+No changes. Your infrastructure matches the configuration.
+```
+
+This result demonstrated that Terraform determined the managed infrastructure to be aligned with the current configuration and that no additional changes were required at that point.
+
+### Engineering Importance
+
+Reliable state management is essential for Infrastructure as Code because Terraform uses state to understand the resources it manages and to calculate changes safely.
+
+For larger or collaborative environments, local state introduces operational considerations such as state sharing, locking, backup, access control, and recovery.
+
+A production-oriented Terraform implementation would therefore typically consider a remote state architecture with appropriate access controls and state locking.
+
+These capabilities were **not implemented as part of this project** and are identified as future improvements.
+
+---
+
 
 
