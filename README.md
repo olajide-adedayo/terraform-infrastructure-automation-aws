@@ -86,3 +86,95 @@ The expected outcome was a functioning AWS infrastructure environment provisione
 The implementation achieved this outcome by provisioning the defined EC2 infrastructure, maintaining its state through Terraform, validating the resulting AWS resources, and performing lifecycle operations after successful verification.
 
 ---
+
+## 3. Solution Architecture
+
+The solution uses Terraform as the Infrastructure as Code control layer between the local engineering environment and AWS. Terraform evaluates the declared configuration, retrieves required information through AWS data sources, provisions the defined resources through the AWS provider, and records the resulting infrastructure in Terraform state.
+
+### Architecture Workflow
+
+                    Engineer
+                       |
+                       v
+              Terraform Configuration
+                       |
+                       v
+                Terraform CLI
+                       |
+                       v
+                AWS Provider
+                       |
+                       v
+                  AWS APIs
+                       |
+          +------------+-------------+
+          |                          |
+          v                          v
+   Terraform Data Sources      AWS Resources
+          |                          |
+          |                    +-----+------+
+          |                    |            |
+          v                    v            v
+     Ubuntu AMI           EC2 Instance  Security Group
+     Discovery               |              |
+                             |              |
+                             +------+-------+
+                                    |
+                                    v
+                              AWS Environment
+                                    |
+                                    v
+                             Terraform State
+
+### Architecture Components
+
+Component| Role
+Terraform| Declaratively defines and manages the AWS infrastructure
+Terraform AWS Provider| Enables Terraform to communicate with AWS APIs
+AWS EC2| Provides the compute infrastructure provisioned by Terraform
+Terraform Data Source| Dynamically retrieves the appropriate Ubuntu AMI information
+AWS Security Group| Controls inbound network access to the EC2 instance
+AWS Key Pair| Provides SSH authentication capability for the EC2 instance
+Terraform State| Records the relationship between Terraform configuration and managed AWS resources
+AWS CLI| Provides command-line verification of deployed AWS infrastructure
+
+### Infrastructure Flow
+
+The implementation follows a declarative workflow:
+
+Terraform Configuration
+        |
+        v
+terraform init
+        |
+        v
+terraform validate
+        |
+        v
+terraform plan
+        |
+        v
+terraform apply
+        |
+        v
+AWS Infrastructure
+        |
+        v
+Terraform State
+        |
+        v
+AWS CLI / AWS Console Verification
+
+### Design Characteristics
+
+The architecture is intentionally simple and modular at the resource-configuration level, while demonstrating core Terraform engineering practices:
+
+- Declarative infrastructure management
+- Dynamic infrastructure information retrieval
+- Separation of infrastructure resources and data sources
+- Controlled network access
+- State-based infrastructure reconciliation
+- Plan-before-apply workflow
+- Independent verification of deployed resources
+
+---
