@@ -207,3 +207,31 @@ Terraform Capabilities Demonstrated
 «Versioning note: Exact software versions will be documented where they were verified for the implementation environment. The README does not rely on version-specific claims unless they are confirmed.»
 
 ---
+
+## 5. Repository Structure
+
+The repository uses a modular Terraform configuration structure in which infrastructure components are separated into focused Terraform files. This improves readability, simplifies maintenance, and makes individual infrastructure components easier to identify and manage.
+
+```text
+terraform-infrastructure-automation-aws/
+│
+├── screenshots/
+│   ├── 01-terraform-project-structure.png
+│   ├── 02-terraform-init-success.png
+│   ├── 03-terraform-validate-success.png
+│   ├── 04-terraform-plan-no-changes.png
+│   ├── 05-terraform-state-resources.png
+│   ├── 06-terraform-security-group-configuration.png
+│   ├── 07-terraform-ec2-resource.png
+│   ├── 08-aws-ec2-verification.png
+│   ├── 09-aws-console-ec2-instance.png
+│   └── 10-aws-security-group-rules.png
+│
+├── .gitignore
+├── .terraform.lock.hcl
+├── instance-id.tf
+├── instance.tf
+├── keypair.tf
+├── provider.tf
+├── secgrp.tf
+└── README.md
