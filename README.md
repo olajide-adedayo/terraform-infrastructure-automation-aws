@@ -331,5 +331,73 @@ This structure keeps the configuration readable while allowing Terraform to trea
 
 ---
 
+## 7. AMI Discovery and Selection
+
+Amazon Machine Images (AMIs) provide the operating system and software baseline used when launching EC2 instances. Because AMI identifiers are specific to AWS regions and image versions, selecting an appropriate AMI is an important part of reliable EC2 provisioning.
+
+### Why AMI Discovery Matters
+
+Hard-coding an AMI ID without understanding its region, publisher, architecture, or image version can make infrastructure configurations less portable and more difficult to maintain.
+
+Terraform data sources provide a way to query existing AWS information and use the resulting data within infrastructure configuration.
+
+In this project, Terraform was used to discover an appropriate Ubuntu AMI for the EC2 instance rather than relying solely on an unexplained hard-coded image identifier.
+
+### AMI Selection Criteria
+
+The AMI discovery configuration used criteria based on the required Ubuntu image characteristics, including:
+
+- Ubuntu operating system
+- AWS region
+- AMI owner
+- Image naming pattern
+- Compatible virtualization characteristics
+- Most recent matching image
+
+The AMI owner value used for the Ubuntu image lookup was:
+
+```text
+099720109477
+```
+
+This identifies the Ubuntu publisher used by the AMI discovery configuration.
+
+### Discovery Method
+
+The AMI was discovered through a Terraform AWS data source. Terraform queried AWS for images matching the configured criteria and selected the most recent matching image.
+
+The resulting AMI information was then used by the EC2 resource configuration.
+
+This approach separates **AMI discovery** from **EC2 resource provisioning**, allowing the infrastructure configuration to obtain the required image information dynamically.
+
+### AMI Verification
+
+The deployed EC2 instance was verified through AWS tooling, confirming the AMI used by the running infrastructure.
+
+Verified instance information included:
+
+| Attribute | Verified Value |
+|---|---|
+| Instance ID | `i-0a14db2822c4f7927` |
+| AMI ID | `ami-06e78a71af43ef21a` |
+| AMI Platform | Linux/UNIX |
+| AMI Operating System | Ubuntu Server 22.04 LTS |
+| AWS Region | `us-east-1` |
+| Availability Zone | `us-east-1a` |
+
+The AWS Console identified the image as:
+
+```text
+ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20260731
+```
+
+### Engineering Consideration
+
+Using an AMI data source improves the maintainability of the configuration by allowing Terraform to discover an appropriate image based on defined criteria.
+
+However, dynamically selecting the most recent image also means that future executions may resolve to a newer image when the matching criteria change. In production environments, AMI selection should therefore be balanced between **automation, reproducibility, security updates, and controlled image versioning**.
+
+---
+
 
 
