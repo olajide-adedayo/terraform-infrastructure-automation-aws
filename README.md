@@ -204,13 +204,11 @@ Terraform Capabilities Demonstrated
 - Infrastructure reconciliation
 - Resource lifecycle management
 
-«Versioning note: Exact software versions will be documented where they were verified for the implementation environment. The README does not rely on version-specific claims unless they are confirmed.»
-
 ---
 
 ## 5. Repository Structure
 
-The repository uses a modular Terraform configuration structure in which infrastructure components are separated into focused Terraform files. This improves readability, simplifies maintenance, and makes individual infrastructure components easier to identify and manage.
+The repository uses a modular Terraform configuration structure in which infrastructure components are separated into focused Terraform files. This improves readability, maintainability, and clarity when managing individual infrastructure components.
 
 ```text
 terraform-infrastructure-automation-aws/
@@ -235,3 +233,23 @@ terraform-infrastructure-automation-aws/
 ├── provider.tf
 ├── secgrp.tf
 └── README.md
+```
+
+### File Responsibilities
+
+| File / Directory | Responsibility |
+|---|---|
+| `provider.tf` | Configures the Terraform AWS provider and target AWS region |
+| `instance.tf` | Defines the Amazon EC2 instance and its configuration |
+| `instance-id.tf` | Defines the Terraform output for the EC2 instance ID |
+| `keypair.tf` | Defines the AWS EC2 key-pair configuration |
+| `secgrp.tf` | Defines the AWS security group and its network access rules |
+| `.terraform.lock.hcl` | Records the selected Terraform provider version and dependency checksums |
+| `.gitignore` | Specifies files and directories that should not be tracked by Git |
+| `screenshots/` | Contains selected screenshots documenting the implementation and verification evidence |
+| `README.md` | Provides the technical documentation for the project |
+
+---
+
+
+**`Document repository structure`**
