@@ -1216,3 +1216,51 @@ Cloud infrastructure should be actively managed throughout its lifecycle.
 Stopping the unused EC2 instance after verification reduced unnecessary ongoing compute usage while maintaining awareness that associated resources such as EBS storage may continue to incur charges.
 
 ---
+
+## 19. Lessons Learned and Engineering Reflection
+
+### What Worked
+
+The Terraform-based workflow successfully demonstrated the use of Infrastructure as Code to define, provision, verify, and manage AWS infrastructure.
+
+Key successful implementation areas included:
+
+- Terraform-based AWS infrastructure provisioning
+- Dynamic AMI discovery
+- EC2 instance configuration
+- Security group configuration
+- EC2 key-pair integration
+- Terraform state management
+- AWS CLI infrastructure verification
+- AWS Management Console verification
+- Configuration reconciliation through `terraform plan`
+
+### What Required Troubleshooting
+
+The implementation required iterative validation and verification of the Terraform configuration and AWS infrastructure.
+
+Troubleshooting was approached through Terraform command output, state inspection, AWS CLI verification, and AWS Management Console inspection rather than relying on a single verification source.
+
+This provided multiple points of confirmation throughout the infrastructure lifecycle.
+
+### What Became Clearer Through Hands-On Implementation
+
+The implementation reinforced several practical Terraform concepts:
+
+- Terraform configuration is declarative and describes the desired infrastructure state.
+- Terraform resources manage infrastructure, while data sources retrieve information from existing cloud services.
+- Terraform state is fundamental to infrastructure tracking and change detection.
+- `terraform plan` provides an important control point before infrastructure changes are applied.
+- AWS resources must be considered within their regional context.
+- Infrastructure verification should be performed independently using cloud-native tools.
+- Security and cost considerations should be incorporated into infrastructure lifecycle management.
+
+### Professional Takeaway
+
+The project strengthened practical understanding of Infrastructure as Code by moving beyond Terraform syntax into the operational aspects of cloud infrastructure management.
+
+The implementation demonstrated how Terraform can be used to establish a repeatable workflow for defining infrastructure, reviewing changes, provisioning resources, maintaining state, verifying deployed infrastructure, and managing the resource lifecycle.
+
+The experience also reinforced the importance of combining automation with security, verification, maintainability, and cloud cost awareness when managing AWS infrastructure.
+
+---
