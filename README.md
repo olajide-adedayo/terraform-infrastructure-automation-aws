@@ -399,5 +399,100 @@ However, dynamically selecting the most recent image also means that future exec
 
 ---
 
+## 8. Terraform Workflow
+
+The infrastructure was managed through a controlled Terraform workflow that progressed from configuration preparation and validation to planning, deployment, and post-deployment verification.
+
+The workflow was:
+
+```text
+Terraform Configuration
+        |
+        v
+terraform fmt
+        |
+        v
+terraform init
+        |
+        v
+terraform validate
+        |
+        v
+terraform plan
+        |
+        v
+terraform apply
+        |
+        v
+AWS Infrastructure
+        |
+        v
+Terraform State
+        |
+        v
+AWS CLI / AWS Console Verification
+```
+
+### `terraform fmt`
+
+`terraform fmt` was used to format the Terraform configuration according to Terraform's standard formatting conventions.
+
+This provides consistent code formatting and improves readability before validation and execution.
+
+### `terraform init`
+
+`terraform init` initialized the Terraform working directory and prepared the required provider dependencies.
+
+The command also generated and maintained the Terraform dependency lock file:
+
+```text
+.terraform.lock.hcl
+```
+
+The successful initialization was captured as part of the project implementation evidence.
+
+### `terraform validate`
+
+`terraform validate` was used to verify that the Terraform configuration was syntactically valid and internally consistent.
+
+Successful validation confirmed that the configuration could be processed by Terraform before proceeding with infrastructure planning.
+
+### `terraform plan`
+
+`terraform plan` was used to evaluate the difference between the Terraform configuration, Terraform state, and the infrastructure Terraform manages.
+
+The plan provided a controlled preview of infrastructure changes before they were applied.
+
+The implementation also demonstrated a **no-change plan**, confirming that Terraform recognized the infrastructure as matching the current configuration at that point in the workflow.
+
+### `terraform apply`
+
+`terraform apply` was used to execute the approved Terraform configuration against AWS.
+
+This resulted in the provisioning and management of the configured AWS infrastructure, including the EC2 instance and its supporting configuration.
+
+Terraform recorded the resulting infrastructure information in its state.
+
+### Verification
+
+The deployed infrastructure was independently verified using both the AWS CLI and AWS Management Console.
+
+The AWS CLI was used to inspect the EC2 instance and confirm attributes including:
+
+- Instance ID
+- Instance state
+- Instance type
+- AMI ID
+- Key pair
+- Availability Zone
+- Private IP address
+- Public IP address
+
+The AWS Management Console was also used to verify the EC2 instance and associated security group configuration.
+
+This combination of Terraform and AWS-native verification provided independent evidence that the infrastructure matched the intended configuration.
+
+---
+
 
 
