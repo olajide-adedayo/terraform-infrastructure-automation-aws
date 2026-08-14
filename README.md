@@ -759,5 +759,95 @@ This provided evidence that the Terraform-managed infrastructure was reconciled 
 
 ---
 
+## 12. Security Practices
+
+Security considerations were incorporated throughout the infrastructure implementation, particularly around AWS authentication, SSH access, source-code management, and protection of sensitive infrastructure artifacts.
+
+### Credential Handling
+
+AWS credentials were kept outside the Terraform configuration and were not embedded directly in Terraform source files.
+
+AWS authentication was performed through supported AWS CLI authentication mechanisms, allowing Terraform to obtain the required AWS permissions without storing credentials in the infrastructure code.
+
+No AWS access keys or secret keys were committed to the Git repository.
+
+### Git Repository Protection
+
+The project uses a `.gitignore` file to prevent sensitive and local Terraform artifacts from being tracked by Git.
+
+The following local artifacts were excluded:
+
+```text
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+dove-key
+dove-key.pub
+```
+
+This prevents local Terraform working data, state files, and SSH key material from being published to the public repository.
+
+### SSH Key Protection
+
+The EC2 instance uses an AWS key pair for SSH authentication.
+
+The private key:
+
+```text
+dove-key
+```
+
+was kept locally and excluded from version control.
+
+The private key was not included in the GitHub repository or project screenshots.
+
+### Security Group Configuration
+
+The EC2 instance is associated with the security group:
+
+```text
+dove-sg-224
+```
+
+The verified inbound rules include:
+
+| Protocol | Port | Source | Purpose |
+|---|---:|---|---|
+| TCP | 22 | `102.89.69.122/32` | SSH access from the configured IP address |
+| TCP | 80 | `0.0.0.0/0` | HTTP access from the internet |
+
+Restricting SSH access to a specific `/32` source address limits administrative access to the configured IP rather than exposing SSH to the entire internet.
+
+HTTP access was intentionally configured for public access through TCP port 80.
+
+### Terraform State Protection
+
+Terraform state can contain infrastructure information that should not be exposed publicly.
+
+For this project, the local state files were excluded from Git version control:
+
+```text
+terraform.tfstate
+terraform.tfstate.backup
+```
+
+The state files were therefore retained locally rather than published in the public repository.
+
+For collaborative or production environments, remote state with appropriate access controls, encryption, and state-locking capabilities would provide stronger operational controls.
+
+### Repository Security Review
+
+Before publishing the project, the repository was checked to ensure that:
+
+- AWS credentials were not committed
+- Private SSH keys were not committed
+- Terraform state files were not committed
+- Local Terraform working directories were not committed
+- Sensitive credentials were not included in screenshots
+
+These controls help reduce the risk of accidentally exposing credentials or sensitive infrastructure information through source control.
+
+---
+
 
 
