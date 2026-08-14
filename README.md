@@ -1264,3 +1264,63 @@ The implementation demonstrated how Terraform can be used to establish a repeata
 The experience also reinforced the importance of combining automation with security, verification, maintainability, and cloud cost awareness when managing AWS infrastructure.
 
 ---
+
+## 20. Future Improvements
+
+The current implementation demonstrates a functional Terraform workflow for AWS infrastructure provisioning and management. The following improvements were identified as potential next steps but were **not implemented as part of this project**.
+
+### Remote Terraform State
+
+Move Terraform state from local storage to a secured remote backend, such as Amazon S3, to support centralized state management and collaboration.
+
+### State Locking
+
+Implement state locking to prevent concurrent Terraform operations from modifying shared infrastructure state simultaneously.
+
+### Least-Privilege IAM
+
+Refine AWS IAM permissions to follow the principle of least privilege, granting Terraform only the permissions required for the specific infrastructure operations.
+
+### Terraform Variables
+
+Replace configuration values that are currently defined directly in Terraform files with input variables where appropriate.
+
+This would improve reusability and make environment-specific configuration easier to manage.
+
+### Reusable Terraform Modules
+
+Refactor repeated or related infrastructure configurations into reusable Terraform modules to improve maintainability and support consistent infrastructure patterns.
+
+### Environment Separation
+
+Introduce separate configurations or workspaces for environments such as development, staging, and production.
+
+### CI/CD Integration
+
+Integrate Terraform into a CI/CD pipeline with automated formatting, validation, planning, approval controls, and controlled deployment.
+
+### Security and Policy Scanning
+
+Introduce automated Terraform security and policy scanning to identify configuration risks before infrastructure changes are applied.
+
+Potential tools could include Terraform-native validation and specialized IaC security scanning solutions.
+
+### Infrastructure Testing
+
+Introduce automated infrastructure testing to validate Terraform configurations and deployed resources beyond basic syntax and plan validation.
+
+### Monitoring and Observability
+
+Add monitoring, logging, alerting, and operational visibility for the deployed AWS infrastructure.
+
+### Cost Governance
+
+Introduce AWS Budgets, cost alerts, resource tagging, and automated lifecycle controls to provide stronger ongoing cloud cost governance.
+
+### Production Readiness
+
+These improvements represent potential steps toward a more collaborative, scalable, secure, and production-oriented Terraform implementation.
+
+They are intentionally documented as **future improvements rather than completed capabilities**.
+
+---
