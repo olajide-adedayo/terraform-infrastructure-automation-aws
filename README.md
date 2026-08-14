@@ -15,6 +15,32 @@ Core Technologies: Terraform · AWS · Amazon EC2 · AWS CLI · Infrastructure a
 
 ---
 
+## Table of Contents
+
+1. [Project Overview](#1-project-overview)
+2. [Engineering Objective](#2-engineering-objective)
+3. [Solution Architecture](#3-solution-architecture)
+4. [Technology Stack](#4-technology-stack)
+5. [Repository Structure](#5-repository-structure)
+6. [Terraform Configuration](#6-terraform-configuration)
+7. [AMI Discovery and Selection](#7-ami-discovery-and-selection)
+8. [Terraform Workflow](#8-terraform-workflow)
+9. [Infrastructure Lifecycle Management](#9-infrastructure-lifecycle-management)
+10. [Terraform State Management](#10-terraform-state-management)
+11. [Hands-On Implementation](#11-hands-on-implementation)
+12. [Security Practices](#12-security-practices)
+13. [AWS Cost Awareness](#13-aws-cost-awareness)
+14. [Troubleshooting and Resolutions](#14-troubleshooting-and-resolutions)
+15. [Verification and Evidence](#15-verification-and-evidence)
+16. [Engineering Skills Demonstrated](#16-engineering-skills-demonstrated)
+17. [Key Engineering Lessons](#17-key-engineering-lessons)
+18. [Lessons Learned and Engineering Reflection](#19-lessons-learned-and-engineering-reflection)
+19. [Future Improvements](#20-future-improvements)
+20. [Quality and Documentation Checks](#21-quality-and-documentation-checks)
+21. [Conclusion](#23-conclusion)
+
+---
+
 ## 1. Project Overview
 
 ### Purpose
