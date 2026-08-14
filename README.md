@@ -165,7 +165,7 @@ The architecture is intentionally simple and modular at the resource-configurati
 
 ---
 
-4. Technology Stack
+## 4. Technology Stack
 
 Technology| Role in the Project
 Terraform| Infrastructure as Code for defining, provisioning, and managing AWS infrastructure
@@ -251,5 +251,85 @@ terraform-infrastructure-automation-aws/
 
 ---
 
+## 6. Terraform Configuration
 
-**`Document repository structure`**
+The infrastructure is defined using Terraform's declarative configuration language (HCL). The configuration is separated into focused Terraform files, with each file responsible for a specific infrastructure or configuration concern.
+
+### Provider Configuration
+
+The AWS provider establishes the connection between Terraform and the AWS environment and specifies the AWS region in which the infrastructure is managed.
+
+The project uses the AWS provider with the deployment region configured as:
+
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+```
+
+This configuration directs Terraform to manage the project's AWS resources in the **US East (N. Virginia) — `us-east-1`** region.
+
+### Resource Configuration
+
+The project defines AWS infrastructure using Terraform resources.
+
+The primary compute resource is an Amazon EC2 instance. Supporting resources include the EC2 key pair and security group required for instance access and network control.
+
+The main resource configuration is organized as follows:
+
+| Configuration | Purpose |
+|---|---|
+| `instance.tf` | Defines the Amazon EC2 instance |
+| `keypair.tf` | Defines the EC2 key-pair configuration |
+| `secgrp.tf` | Defines the security group and network access rules |
+
+Terraform evaluates these resource definitions and determines the required actions during `terraform plan` before changes are applied to AWS.
+
+### Data Sources
+
+The project uses a Terraform data source to dynamically discover an appropriate Ubuntu AMI rather than hard-coding an AMI ID without verification.
+
+The AMI lookup uses defined selection criteria, including the AMI owner and image characteristics, allowing Terraform to retrieve a suitable image available in the configured AWS region.
+
+This approach is useful because **AMI IDs are region-specific** and can change as new image versions are published.
+
+### Outputs
+
+The project exposes the EC2 instance ID through a Terraform output.
+
+The output is defined in:
+
+```text
+instance-id.tf
+```
+
+The output provides a convenient way to retrieve the identifier of the Terraform-managed EC2 instance after deployment.
+
+### Configuration Organization
+
+The Terraform configuration follows a simple separation of concerns:
+
+```text
+provider.tf
+    │
+    ├── AWS Provider
+    │
+    ├── instance.tf
+    │      └── EC2 Instance
+    │
+    ├── keypair.tf
+    │      └── EC2 Key Pair
+    │
+    ├── secgrp.tf
+    │      └── Security Group
+    │
+    └── instance-id.tf
+           └── EC2 Instance ID Output
+```
+
+This structure keeps the configuration readable while allowing Terraform to treat the `.tf` files in the working directory as a single configuration.
+
+---
+
+
+
