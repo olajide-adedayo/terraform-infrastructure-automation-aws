@@ -849,5 +849,54 @@ These controls help reduce the risk of accidentally exposing credentials or sens
 
 ---
 
+## 13. AWS Cost Awareness
+
+Cloud cost awareness was considered throughout the implementation, particularly when managing the lifecycle of the EC2 instance.
+
+The project was designed to provision only the infrastructure required for the Terraform implementation and verification activities.
+
+### Cost-Control Practices
+
+The following cost-conscious practices were applied:
+
+- Avoided unnecessary infrastructure creation during Terraform configuration and data-source exercises
+- Verified infrastructure state before performing additional operations
+- Monitored the EC2 instance lifecycle after deployment
+- Stopped the EC2 instance when active compute usage was no longer required
+- Avoided leaving an unused EC2 compute resource continuously running
+
+### Current Resource Status
+
+At the time of final verification, the EC2 instance was in the:
+
+```text
+stopped
+```
+
+state.
+
+Verified instance:
+
+```text
+Instance ID:    i-0a14db2822c4f7927
+Instance Type:  t3.micro
+Region:         us-east-1
+State:          stopped
+```
+
+Stopping the instance prevents ongoing EC2 compute processing charges while the instance remains stopped. However, stopping an EC2 instance does **not necessarily eliminate all associated AWS costs**.
+
+For example, attached EBS storage and other associated resources may continue to incur charges while the instance is stopped.
+
+### Engineering Consideration
+
+Cost management is part of responsible cloud engineering. Infrastructure should be provisioned according to actual requirements, monitored during use, and stopped or removed when it is no longer required.
+
+For longer-running environments, additional controls such as AWS Budgets, cost alerts, automated lifecycle policies, and resource tagging can provide stronger cost governance.
+
+These additional controls were **not implemented as part of this project** and are considered potential future improvements.
+
+---
+
 
 
