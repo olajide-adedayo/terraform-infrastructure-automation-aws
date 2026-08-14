@@ -1099,3 +1099,68 @@ The following screenshots provide visual evidence of the Terraform implementatio
 *AWS Management Console verification of the EC2 security group rules.*
 
 ---
+
+## 16. Engineering Skills Demonstrated
+
+This project demonstrates practical experience across cloud infrastructure, Infrastructure as Code, Terraform operations, AWS resource management, security configuration, and infrastructure verification.
+
+### Cloud Engineering
+
+- Amazon EC2 provisioning and lifecycle management
+- AWS security group configuration
+- AWS key-pair management
+- Ubuntu AMI selection and management
+- AWS CLI-based infrastructure administration
+- AWS Management Console verification
+- AWS regional infrastructure awareness
+
+### Infrastructure as Code
+
+- Terraform configuration using HCL
+- AWS provider configuration
+- Terraform resources
+- Terraform data sources
+- Terraform outputs
+- Declarative infrastructure provisioning
+- Infrastructure planning and change review
+- Terraform state management
+- Infrastructure reconciliation
+
+### Terraform Engineering
+
+- `terraform fmt`
+- `terraform init`
+- `terraform validate`
+- `terraform plan`
+- `terraform apply`
+- Terraform provider dependency management
+- AMI discovery through data sources
+- Resource lifecycle management
+- State-based infrastructure tracking
+- No-change plan verification
+
+### DevOps Practices
+
+- Infrastructure automation
+- Configuration-driven infrastructure management
+- CLI-based cloud operations
+- Infrastructure verification
+- Configuration validation
+- Change detection
+- Troubleshooting and diagnostic workflows
+- Security-conscious source-code management
+- Cloud cost awareness
+- Evidence-based infrastructure documentation
+
+### Security and Operational Practices
+
+- Restricted SSH access using a `/32` source address
+- Public HTTP access configuration
+- AWS credential protection
+- SSH private-key protection
+- Terraform state protection
+- `.gitignore` configuration for sensitive artifacts
+- Controlled infrastructure lifecycle management
+- AWS resource cost awareness
+
+---
