@@ -639,5 +639,125 @@ These capabilities were **not implemented as part of this project** and are iden
 
 ---
 
+## 11. Hands-On Implementation
+
+The infrastructure was implemented through a structured Terraform workflow covering environment preparation, AWS authentication, configuration, validation, planning, provisioning, verification, and final state reconciliation.
+
+### Step 1 — Environment Preparation
+
+The local development environment was prepared with the required Terraform and AWS command-line tooling.
+
+Terraform configuration was organized into separate `.tf` files to maintain clear separation of infrastructure responsibilities.
+
+The project was managed using Visual Studio Code and PowerShell.
+
+### Step 2 — AWS Authentication
+
+AWS authentication was configured through supported AWS CLI authentication mechanisms.
+
+Credentials were kept outside the Terraform configuration and were not committed to the Git repository.
+
+AWS access was verified before performing infrastructure operations.
+
+### Step 3 — Terraform Initialization
+
+The Terraform working directory was initialized using:
+
+```bash
+terraform init
+```
+
+Terraform successfully initialized the working directory and installed the required AWS provider dependency.
+
+The provider dependency selection was recorded in:
+
+```text
+.terraform.lock.hcl
+```
+
+### Step 4 — Configuration
+
+The AWS infrastructure was defined using Terraform configuration files covering:
+
+- AWS provider configuration
+- EC2 instance provisioning
+- AMI discovery
+- EC2 key-pair configuration
+- Security group configuration
+- EC2 instance ID output
+
+The configuration was organized into focused Terraform files to improve maintainability and readability.
+
+### Step 5 — Validation
+
+The configuration was formatted and validated before infrastructure deployment.
+
+The validation workflow included:
+
+```bash
+terraform fmt
+terraform validate
+```
+
+Successful validation confirmed that the Terraform configuration was syntactically valid and internally consistent.
+
+### Step 6 — Planning
+
+The infrastructure changes were reviewed using:
+
+```bash
+terraform plan
+```
+
+Terraform generated an execution plan based on the declared configuration and current state.
+
+The plan was used as a controlled review point before applying infrastructure changes.
+
+### Step 7 — Deployment
+
+The approved configuration was applied using:
+
+```bash
+terraform apply
+```
+
+Terraform provisioned the defined AWS infrastructure and recorded the resulting resource information in the local Terraform state.
+
+### Step 8 — Verification
+
+The provisioned infrastructure was independently verified using the AWS CLI and AWS Management Console.
+
+The EC2 instance was verified using:
+
+```bash
+aws ec2 describe-instances
+```
+
+The verification confirmed key attributes including the instance ID, instance state, instance type, AMI ID, Availability Zone, private IP address, and public IP address.
+
+The AWS Management Console was also used to verify the EC2 instance and associated security group configuration.
+
+### Step 9 — Configuration Change Test
+
+Terraform's ability to detect infrastructure differences was evaluated through the plan workflow.
+
+Terraform compared the declared configuration with its recorded state and the managed infrastructure to determine whether changes were required.
+
+This demonstrated Terraform's configuration-driven approach to infrastructure reconciliation.
+
+### Step 10 — Final State
+
+After verification and lifecycle management activities, the EC2 instance was confirmed in the `stopped` state.
+
+The final Terraform plan reported:
+
+```text
+No changes. Your infrastructure matches the configuration.
+```
+
+This provided evidence that the Terraform-managed infrastructure was reconciled with the declared configuration at the time of final verification.
+
+---
+
 
 
