@@ -494,5 +494,84 @@ This combination of Terraform and AWS-native verification provided independent e
 
 ---
 
+## 9. Infrastructure Lifecycle Management
+
+Terraform was used throughout the infrastructure lifecycle to provision, inspect, evaluate, and reconcile the AWS resources defined by the configuration.
+
+The lifecycle approach followed the principle of making infrastructure changes through declarative configuration and reviewing Terraform's proposed actions before applying them.
+
+### Create
+
+The infrastructure was provisioned through Terraform using the configured AWS resources.
+
+The primary infrastructure created during the implementation was an Amazon EC2 instance supported by:
+
+- An AWS EC2 key pair
+- An AWS security group
+- A dynamically selected Ubuntu AMI
+
+Terraform recorded the resulting infrastructure in its state after successful provisioning.
+
+### Inspect
+
+The deployed EC2 infrastructure was inspected using both Terraform and AWS-native tools.
+
+AWS CLI verification confirmed key infrastructure attributes, including:
+
+```text
+Instance ID:          i-0a14db2822c4f7927
+Instance State:       stopped
+Instance Type:        t3.micro
+AMI ID:               ami-06e78a71af43ef21a
+Availability Zone:    us-east-1a
+Private IP:           172.31.14.57
+```
+
+The AWS Management Console was also used to inspect the EC2 instance and its associated security group configuration.
+
+### Update
+
+The Terraform configuration was evaluated through the normal plan-and-apply workflow when infrastructure configuration changes were introduced.
+
+Terraform uses the configuration and recorded state to determine whether an update is required and what actions would be necessary to bring the managed infrastructure into the desired configuration.
+
+### Plan-Based Change Detection
+
+`terraform plan` was used to identify differences between the declared Terraform configuration, recorded state, and managed AWS infrastructure.
+
+This provides a controlled mechanism for reviewing infrastructure changes before execution.
+
+A subsequent plan produced:
+
+```text
+No changes. Your infrastructure matches the configuration.
+```
+
+This confirmed that Terraform considered the managed infrastructure reconciled with the current configuration.
+
+### State Reconciliation
+
+Terraform state provided the reference information required to associate the declared Terraform resources with their corresponding AWS resources.
+
+During reconciliation, Terraform evaluated the configuration and state to determine whether additional infrastructure changes were required.
+
+The successful no-change plan demonstrated that the configuration and Terraform-managed infrastructure were aligned at the time of verification.
+
+### Resource Lifecycle and Cost Management
+
+The EC2 instance was subsequently stopped after the infrastructure verification activities.
+
+The final AWS verification confirmed the instance state as:
+
+```text
+stopped
+```
+
+Stopping an unused EC2 instance reduces compute usage compared with leaving it continuously running. However, a stopped EC2 instance can still incur charges for associated resources such as attached storage, so stopping an instance should not be interpreted as eliminating all AWS costs.
+
+This lifecycle action demonstrates operational awareness of resource utilization and cloud cost management.
+
+---
+
 
 
