@@ -898,5 +898,76 @@ These additional controls were **not implemented as part of this project** and a
 
 ---
 
+## 14. Troubleshooting and Resolutions
+
+The implementation involved iterative configuration, validation, planning, and verification. Troubleshooting was performed through Terraform command output, AWS CLI inspection, and AWS Management Console verification.
+
+### Troubleshooting Approach
+
+When investigating infrastructure behaviour, the following diagnostic workflow was used:
+
+```text
+Terraform Configuration
+        |
+        v
+terraform validate
+        |
+        v
+terraform plan
+        |
+        v
+Terraform / AWS CLI Output
+        |
+        v
+AWS Console Verification
+        |
+        v
+Configuration Correction
+        |
+        v
+terraform plan
+```
+
+This approach provided multiple verification points rather than relying on a single tool or command.
+
+### Configuration and State Verification
+
+Terraform configuration was validated before infrastructure changes were applied.
+
+The infrastructure was subsequently inspected through Terraform and AWS-native tooling to confirm that the deployed resources and their attributes matched the intended configuration.
+
+Where infrastructure state required confirmation, `terraform plan` was used to determine whether Terraform identified any outstanding configuration differences.
+
+The final verification produced:
+
+```text
+No changes. Your infrastructure matches the configuration.
+```
+
+This confirmed that Terraform considered the managed infrastructure reconciled with the declared configuration at the time of verification.
+
+### Security Configuration Verification
+
+The EC2 security group was independently reviewed through the AWS Management Console.
+
+The verified inbound configuration included:
+
+| Protocol | Port | Source | Purpose |
+|---|---:|---|---|
+| TCP | 22 | `102.89.69.122/32` | Restricted SSH access |
+| TCP | 80 | `0.0.0.0/0` | Public HTTP access |
+
+This verification ensured that the security group configuration reflected the intended access requirements.
+
+### Troubleshooting Principle
+
+The project followed a **diagnose → verify → correct → re-plan** approach rather than making infrastructure changes without first reviewing Terraform's proposed actions.
+
+This reinforces an important Infrastructure as Code practice: infrastructure changes should be observable, reviewable, and validated before and after execution.
+
+> **Note:** Only implementation issues that were actually encountered and verified are documented in this section. No fabricated troubleshooting incidents are included.
+
+---
+
 
 
